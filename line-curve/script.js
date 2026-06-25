@@ -3,6 +3,7 @@ var finalPath = `M 10 100 Q 500 100 990 100`
 
 let main = document.querySelector(".main")
 let cursor = document.querySelector("#cursor")
+let image = document.querySelector("#image")
 
 main.addEventListener("mousemove", function (dets) {
     path = `M 10 100 Q ${dets.x} ${dets.y} 990 100`
@@ -27,7 +28,7 @@ main.addEventListener("mousemove", function (dets) {
     gsap.to(cursor, {
         x: dets.x,
         y: dets.y,
-        duration: 0.5
+        duration: 1,
+        ease: "back.out"
     })
 })
-

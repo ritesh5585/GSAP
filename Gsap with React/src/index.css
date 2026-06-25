@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+#root {
+  background-color: rgb(29, 29, 29);
+  color: #181818;
+}
+
+.box1 {
+  background-color: aqua;
+  height: 50px;
+  width: 200px;
+  margin: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
