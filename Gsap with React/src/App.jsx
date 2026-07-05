@@ -8,12 +8,15 @@ export default function App() {
     });
 
     gsap.to(".box1", {
-      x: 1200,
+      x: 800,
       duration: 1,
       delay: 0.5,
       ease: "powder2.out(0.7)",
       repeat: 5,
-      stagger: 0.2,
+      stagger: {
+        each: 0.1,
+        from: "edges"
+      },
     });
   }, []);
 
