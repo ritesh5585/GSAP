@@ -6,7 +6,46 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
- 
+  const componentRef = useRef(null);
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    // A simple context to clean up GSAP animations easily when unmounting
+    let ctx = gsap.context(() => {
+      // 1. Basic Intro Animation (Topic: Tweens & Easing)
+      gsap.to(".title", {
+        opacity: 1,
+        y: 0,
+        duration: 1.5,
+        ease: "power4.out",
+        delay: 0.2,
+      });
+
+      gsap.to(".subtitle", {
+        opacity: 1,
+        duration: 1.5,
+        ease: "power2.inOut",
+        delay: 0.8,
+      });
+
+      // 2. Horizontal Scroll Animation (Topic: ScrollTrigger Pinning & Scrubbing)
+      const panels = gsap.utils.toArray(".panel");
+
+      gsap.to(panels, {
+        xPercent: -100 * (panels.length - 1),
+        ease: "none",
+        scrollTrigger: {
+          trigger: sliderRef.current,
+          pin: true,
+          scrub: 1, // Smooth scrubbing, takes 1 second to "catch up" to the scrollbar
+          snap: 1 / (panels.length - 1), // Snap to the closest section
+          end: () => "+=" + sliderRef.current.offsetWidth, // The scroll distance equals the width of the container
+        },
+      });
+    }, componentRef);
+
+    return () => ctx.revert(); // Cleanup on unmount
+  }, []);
 
   return (
     <div ref={componentRef}>
